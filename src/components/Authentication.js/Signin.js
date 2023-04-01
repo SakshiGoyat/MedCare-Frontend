@@ -17,13 +17,16 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setloading] = useState(false);
+  
   const toast = useToast();
   const history = useHistory();
 
+  // to show and hide password
   const handleClick = () => {
     setShow(!show);
   };
 
+  // to submit the sign in 
   const submitHandler = async () => {
     setloading(true);
     if (!email || !password) {
@@ -52,6 +55,8 @@ const Signin = () => {
         },
         config
       );
+      localStorage.setItem("userInfo", JSON.stringify(data.data));
+      
       toast({
         title: "Logged in successfull",
         status: "success",
@@ -59,8 +64,7 @@ const Signin = () => {
         isClosable: true,
         position: "bottom",
       });
-      localStorage.setItem("userInfo", JSON.stringify(data));
-
+      
       setloading(false);
       history.push("/chats");
     } catch (error) {

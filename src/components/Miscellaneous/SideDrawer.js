@@ -1,3 +1,5 @@
+// sidedrawer is handling: profile section, search section,
+
 import React, { useState } from "react";
 import {
   Box,
@@ -48,6 +50,7 @@ const SideDrawer = () => {
 
   const toast = useToast();
 
+  // to access the chats
   const accessChat = async (userId) => {
     try {
       setloadingChat(true);
@@ -60,7 +63,7 @@ const SideDrawer = () => {
       };
 
       const data = await axios.post(
-        "http://localhost:5000/api/chat",
+        "http://localhost:5000/api/chat/",
         { userId },
         config
       );
@@ -84,6 +87,8 @@ const SideDrawer = () => {
       console.log(error);
     }
   };
+
+  // to search users
   const handleSearch = async () => {
     if (!search) {
       toast({
@@ -129,6 +134,7 @@ const SideDrawer = () => {
   // console.log(user);
   return (
     <>
+      {/* header box having search section, website name, and profile section */}
       <Box
         display="flex"
         justifyContent="space-between"
@@ -138,7 +144,8 @@ const SideDrawer = () => {
         p="5px 10px 5px 10px"
         borderWidth="5px"
       >
-        <Tooltip label="Seach Users to chat" hasArrow placement="bottom-end">
+        {/* to search doctor only frontent*/}
+        <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
             <FaSearch />
             <Text display={{ base: "none", md: "flex" }} p="0.5rem">
@@ -150,6 +157,7 @@ const SideDrawer = () => {
         <Text fontSize="2*1" fontFamily="ubuntu">
           MedCare
         </Text>
+
         <div>
           <Menu>
             <MenuButton p={1}>
@@ -157,20 +165,20 @@ const SideDrawer = () => {
             </MenuButton>
             {/* <MenuList></MenuList> */}
           </Menu>
+          {/* user profile */}
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               <Avatar
                 size="sm"
                 cursor="pointer"
                 name={user.name}
-                src={user.pic}
+                src={user.image}
               />
             </MenuButton>
             <MenuList>
               <ProfileModel user={user}>
                 <MenuItem>My Profile</MenuItem>
               </ProfileModel>
-
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
@@ -178,6 +186,7 @@ const SideDrawer = () => {
         </div>
       </Box>
 
+    {/* don't understand */}
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
@@ -186,6 +195,7 @@ const SideDrawer = () => {
             Create your account
           </DrawerHeader>
 
+          {/* searching doctor functionality */}
           <DrawerBody>
             <Box display="flex" pb={2}>
               <Input
@@ -211,6 +221,7 @@ const SideDrawer = () => {
             )}
           </DrawerBody>
           {loadingChat && <Spinner ml="auto" display="flex" />}
+          {/* save button is not working */}
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel

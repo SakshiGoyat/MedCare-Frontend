@@ -4,14 +4,14 @@ import React from 'react'
 const chatloading = () => {
   return (
     <Stack>
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
-      <Skeleton height="20px" />
+      <Skeleton height="3rem" />
+      <Skeleton height="3rem" />
+      <Skeleton height="3rem" />
+      <Skeleton height="3rem" />
+      <Skeleton height="3rem" />
+      <Skeleton height="3rem" />
+      <Skeleton height="3rem" />
+      <Skeleton height="3rem" />
     </Stack>
   );
 }

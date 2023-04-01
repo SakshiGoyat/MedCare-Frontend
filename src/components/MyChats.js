@@ -8,7 +8,8 @@ import chatloading from "./chatloading";
 
 import { getSender } from "../config/ChatLogics";
 import GroupChatModal from "./Miscellaneous/GroupChatModal";
-const MyChats = () => {
+
+const MyChats = ({fetchAgain}) => {
   const [loggedUser, setloggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
@@ -24,7 +25,7 @@ const MyChats = () => {
       };
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/chat",
+        "http://localhost:5000/api/chat/",
         config
       );
       console.log(data);
@@ -45,10 +46,12 @@ const MyChats = () => {
   useEffect(() => {
     setloggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
-  }, []);
+  }, [fetchAgain]);
+
   return (
     <Box
-      displat={{ base: selectedChat ? "none" : "flex", md: "flex" }}
+      // side one box having my chats.
+      display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
       flexDir="column"
       alignItems="center"
       p={3}
@@ -61,7 +64,7 @@ const MyChats = () => {
         pb={3}
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
-        fontFamily="Work sans"
+        fontFamily="ubuntu"
         display="flex"
         w="100%"
         justifyContent="space-between"
@@ -77,49 +80,49 @@ const MyChats = () => {
             New Group Chat
           </Button>
         </GroupChatModal>
-        <Box
-          display="flex"
-          flexDir="column"
-          p={3}
-          bg="#F8F8F8"
-          w="100%"
-          h="100%"
-          borderRadius="lg"
-          overflowY="hidden"
-        >
-          {chats ? (
-            <Stack overflowY="scroll">
-              {chats.map((chat) => (
-                <Box
-                  onClick={() => setSelectedChat(chat)}
-                  cursor="pointer"
-                  bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
-                  color={selectedChat === chat ? "white" : "black"}
-                  px={3}
-                  py={2}
-                  borderRadius="lg"
-                  key={chat._id}
-                >
-                  <Text>
-                    {!chat.isGroupChat
-                      ? getSender(loggedUser, chat.users)
-                      : chat.chatName}
+      </Box>
+      <Box
+        display="flex"
+        flexDir="column"
+        p={3}
+        bg="#F8F8F8"
+        w="100%"
+        h="100%"
+        borderRadius="lg"
+        overflowY="hidden"
+      >
+        {chats ? (
+          <Stack overflowY="scroll">
+            {chats.map((chat) => (
+              <Box
+                onClick={() => setSelectedChat(chat)}
+                cursor="pointer"
+                bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                color={selectedChat === chat ? "white" : "black"}
+                px={3}
+                py={2}
+                borderRadius="lg"
+                key={chat._id}
+              >
+                <Text>
+                  {!chat.isGroupChat
+                    ? getSender(loggedUser, chat.users)
+                    : chat.chatName}
+                </Text>
+                {chat.latestMessage && (
+                  <Text fontSize="xs">
+                    <b>{chat.latestMessage.sender.name} : </b>
+                    {chat.latestMessage.content.length > 50
+                      ? chat.latestMessage.content.substring(0, 51) + "..."
+                      : chat.latestMessage.content}
                   </Text>
-                  {chat.latestMessage && (
-                    <Text fontSize="xs">
-                      <b>{chat.latestMessage.sender.name} : </b>
-                      {chat.latestMessage.content.length > 50
-                        ? chat.latestMessage.content.substring(0, 51) + "..."
-                        : chat.latestMessage.content}
-                    </Text>
-                  )}
-                </Box>
-              ))}
-            </Stack>
-          ) : (
-            <chatloading />
-          )}
-        </Box>
+                )}
+              </Box>
+            ))}
+          </Stack>
+        ) : (
+          <chatloading />
+        )}
       </Box>
     </Box>
   );

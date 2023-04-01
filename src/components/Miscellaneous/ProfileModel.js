@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 const ProfileModel = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-
+  console.log(user);
   return (
     <>
       {children ? (
@@ -36,30 +36,49 @@ const ProfileModel = ({ user, children }) => {
         <ModalOverlay />
         <ModalContent h="410px">
           <ModalHeader
-            fontSize="40px"
+            fontSize="2rem"
             fontFamily="ubuntu"
             display="flex"
             justifyContent="center"
           >
-            {user.name}
+            Hello Patient!!!
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody
-            display="flex"
-            flexDir="column"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            Hello Patients
-          </ModalBody>
+
+          {/* showing image */}
           <Image
             borderRadius="full"
             boxSize="150px"
-            src={user.pic}
+            display="flex"
+            alignItems="left"
+            marginLeft="1rem"
+            src={user.image}
             alt={user.name}
           />
+          {/* showing name */}
+          {/* <ModalBody
+            display="flex"
+            flexDir="column"
+            marginLeft="0rem"
+            justifyContent="space-between"
+            fontSize="2rem"
+          >
+            Name: {user.name}
+          </ModalBody> */}
 
-          <Text fontSize={{ base: "28px", md: "30px" }} fontFamily="ubuntu">
+          <Text
+            fontSize={{ base: "2rem", md: "30px" }}
+            fontFamily="ubuntu"
+            marginLeft="1rem"
+          >
+            Name: {user.name}
+          </Text>
+          
+          <Text
+            fontSize={{ base: "2rem", md: "30px" }}
+            fontFamily="ubuntu"
+            marginLeft="1rem"
+          >
             Email: {user.email}
           </Text>
           <ModalFooter>

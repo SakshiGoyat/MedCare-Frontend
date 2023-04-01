@@ -25,14 +25,17 @@ const Signup = () => {
   const toast = useToast();
   const history = useHistory();
 
+  // for password toggle button
   const handleClick = () => {
     setShow(!show);
   };
 
+  // for confirm password toggle button
   const handleClick1 = () => {
     setShow1(!show1);
   };
 
+  // to submit the request
   const submitHandler = async () => {
     setloading(true);
     if (!name || !email || !password || !confirmPassword) {
@@ -68,7 +71,7 @@ const Signup = () => {
           name,
           email,
           password,
-          image,
+          imageUrl,
         },
         {
           headers: {
@@ -76,7 +79,11 @@ const Signup = () => {
           },
         }
       );
-      console.log(res);
+      console.log(3);
+      // send all data from backend.
+      // console.log(res);
+      localStorage.setItem("userInfo", JSON.stringify(res.data));
+      console.log(JSON.parse(localStorage.getItem("userInfo")));
       toast({
         title: "Registration successfull",
         status: "success",
@@ -84,8 +91,6 @@ const Signup = () => {
         isClosable: true,
         position: "bottom",
       });
-      localStorage.setItem("userInfo", JSON.stringify(res));
-
       setloading(false);
       history.push("/chats");
     } catch (error) {
@@ -102,61 +107,12 @@ const Signup = () => {
     }
   };
 
-  // const postDetail = (pic) => {
-  //   setloading(true);
-  //   if (pic === undefined) {
-  //     toast({
-  //       title: "Please select an image.",
-  //       status: "warning",
-  //       duration: 5000,
-  //       isClosable: true,
-  //       position: "bottom",
-  //     });
-  //     return;
-  //   }
-  //   if (
-  //     pic.type === "image/jpeg" ||
-  //     pic.type === "image/png" ||
-  //     pic.type === "image/jpg"
-  //   ) {
-  //     const data = new FormData();
-  //     data.append("file", pic);
-  //     data.append("upload_preset", "Health-app");
-  //     data.append("cloud_name", "dwglxcj0m");
-  //     fetch("https://api.cloudinary.com/v1_1/dwglxcj0m/image/upload", {
-  //       method: "POST",
-  //       // mode: "cors",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       data,
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setImageUrl(response.data.secure_url);
-  //         setloading(false);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         setloading(false);
-  //       });
-  //   } else {
-  //     toast({
-  //       title: "Please select an image.",
-  //       status: "warning",
-  //       duration: 5000,
-  //       isClosable: true,
-  //       position: "bottom",
-  //     });
-  //     setloading(false);
-  //     return;
-  //   }
-  // };
-
+  // for uploading image
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };
 
+  // functionality of the button to upload the image
   const handleImageUpload = async () => {
     try {
       const formData = new FormData();
@@ -235,7 +191,7 @@ const Signup = () => {
           accept="image/*"
           onChange={handleImageChange}
         />
-        <Button onClick={handleImageUpload}>Upload Image</Button>
+        <Button onClick={handleImageUpload}>Upload Image</Button> 
         {imageUrl && <img src={imageUrl} alt="Uploaded" />}
       </FormControl>
 
