@@ -23,7 +23,7 @@ import UserListItem from "../userAvatar/userListItem";
 
 import axios, * as others from "axios";
 
-const UpdateGroupChatModal = ({ fetchAgain, setfetchAgain }) => {
+const UpdateGroupChatModal = ({ fetchAgain, setfetchAgain, fetchMessages}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState();
   const [search, setSearch] = useState("");
@@ -36,6 +36,8 @@ const UpdateGroupChatModal = ({ fetchAgain, setfetchAgain }) => {
 
   // handle remove
   const handleRemove = async (user1) => {
+    console.log(user);
+    console.log("user id ",user._id, " ","groupAdmin ", selectedChat.groupAdmin._id );
     if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
       toast({
         title: "Only admins can remove someone!",
@@ -62,7 +64,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setfetchAgain }) => {
         },
         config
       );
-
+        console.log("update grp chat modal ",data);
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
       setfetchAgain(!fetchAgain);
       fetchMessages();
@@ -236,7 +238,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setfetchAgain }) => {
 
           <ModalCloseButton />
           <ModalBody display="flex" flexDir="column" alignItems="center">
-            <Box w="100%" display="flex" flexWrap="wrap" pb={3}>
+            <Box w="100%" height="100%" display="flex" flexWrap="wrap" pb={3}>
               {selectedChat.users.map((u) => (
                 <UserBadgeItem
                   key={u._id}

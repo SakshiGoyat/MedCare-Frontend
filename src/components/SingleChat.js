@@ -1,15 +1,197 @@
+// all chat part, myside beside part
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, IconButton, Spinner, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  Input,
+  MenuItem,
+  Spinner,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { ChatState } from "../Context/chatProvider";
 import ProfileModal from "./Miscellaneous/ProfileModel";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import UpdateGroupChatModal from "./Miscellaneous/UpdateGroupChatModal";
+import ScrollableChat from "./ScrollableChat";
+// import Lottie from "react-lottie";
 
+import './style.css';
+import io from "socket.io-client";
+
+import axios, * as others from "axios";
+import { FaJira } from "react-icons/fa";
+
+const ENDPOINT = "http://localhost:5000";
+var socket, selectedChatCompare;
+
+// import "./style.css";
 const SingleChat = ({ fetchAgain, setfetchAgain }) => {
-  const [messages, setMessages] = useState([]);
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const [messages, setMessages] = useState();
+  const [loading, setloading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
+  const [typing, setTyping] = useState(false);
+  const [istyping, setIsTyping] = useState(false);
+  const [socketConnected, setsocketConnected] = useState(false);
+  const { user, selectedChat, setSelectedChat, notification, setNotification } =
+    ChatState();
+
+  const toast = useToast();
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    //  animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("setup", user);
+    socket.on("connected", () => {
+      setsocketConnected(true);
+    });
+
+    socket.on("typing", () => {
+      setIsTyping(true);
+    });
+
+    socket.on("stop typing", () => {
+      setIsTyping(false);
+    });
+  }, []);
+
+  // sendMessage
+  const sendMessage = async (event) => {
+    if (event.key === "Enter" && newMessage) {
+      socket.emit("stop typing", selectedChat._id);
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+
+        setNewMessage("");
+
+        const { data } = await axios.post(
+          "http://localhost:5000/api/message/",
+          {
+            content: newMessage,
+            chatId: selectedChat._id,
+          },
+          config
+        );
+
+        console.log(data);
+
+        socket.emit("new message", data);
+
+        setMessages([...messages, data]);
+      } catch (error) {
+        toast({
+          title: "Error Occured!",
+          description: "Failed to Load the Messages1",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+
+        console.log(error);
+      }
+    }
+  };
+
+  // typing handler
+  const typingHandler = (e) => {
+    setNewMessage(e.target.value);
+
+    if (!socketConnected) return;
+
+    if (!typing) {
+      setTyping(true);
+      socket.emit("typing", selectedChat._id);
+    }
+    let lastTypingTime = new Date().getTime();
+    var timerLength = 3000;
+    setTimeout(() => {
+      var timeNow = new Date().getTime();
+      var timeDiff = timeNow - lastTypingTime;
+      if (timeDiff >= timerLength && typing) {
+        socket.emit("stop typing", selectedChat._id);
+        setTyping(false);
+      }
+    }, timerLength);
+  };
+
+  // fetch messages
+  const fetchMessages = async () => {
+    if (!selectedChat) return;
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      setloading(true);
+      // console.log(selectedChat._id);
+      const { data } = await axios.get(
+        `http://localhost:5000/api/message/${selectedChat._id}`,
+        config
+      );
+        // console.log(22)
+      // console.log("messages in single chat" ,messages);
+      // console.log(data);
+      setMessages(data);
+      console.log("messages in singleChat" ,messages);
+      setloading(false);
+
+      socket.emit("join chat", selectedChat._id);
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        description: "Failed to Load the Messages2",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
+
+  useEffect(() => {
+    selectedChatCompare = selectedChat;
+    fetchMessages();
+  }, [selectedChat]);
+
+  useEffect(() => {
+    socket.on("message recieved", (newMessageRecieved) => {
+      if (
+        !selectedChatCompare ||
+        selectedChatCompare._id !== newMessageRecieved.chat._id
+      ) {
+        // give notification
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([newMessageRecieved, ...notification]);
+          setfetchAgain(!fetchAgain);
+        }
+      } else {
+        setMessages([...messages, newMessageRecieved]);
+      }
+    });
+  });
+
+  // socket setup
+
   return (
     <>
       {selectedChat ? (
@@ -29,20 +211,21 @@ const SingleChat = ({ fetchAgain, setfetchAgain }) => {
               icon={<ArrowBackIcon />}
               onClick={() => setSelectedChat("")}
             />
-
             {messages &&
               (!selectedChat.isGroupChat ? (
                 <>
+                  {/* this part is for one to one chat not for groups */}
                   {getSender(user, selectedChat.users)}
-                  <ProfileModal
-                    user={getSenderFull(user, selectedChat.users)}
-                  />
+                  <ProfileModal user={getSenderFull(user, selectedChat.users)}>
+                    <Button>User Profile</Button>
+                  </ProfileModal>
                 </>
               ) : (
                 <>
+                  {/* for groups */}
                   {selectedChat.chatName.toUpperCase()}
                   <UpdateGroupChatModal
-                    // fetchMessages={fetchMessages}
+                    fetchMessages={fetchMessages}
                     fetchAgain={fetchAgain}
                     setfetchAgain={setfetchAgain}
                   />
@@ -60,7 +243,8 @@ const SingleChat = ({ fetchAgain, setfetchAgain }) => {
             borderRadius="lg"
             overflowY="hidden"
           >
-            {/* {loading ? (
+          {/* showing msgs */}
+            {loading ? (
               <Spinner
                 size="xl"
                 w={20}
@@ -74,6 +258,7 @@ const SingleChat = ({ fetchAgain, setfetchAgain }) => {
               </div>
             )}
 
+              {/* sending msgs */}
             <FormControl
               onKeyDown={sendMessage}
               id="first-name"
@@ -82,12 +267,13 @@ const SingleChat = ({ fetchAgain, setfetchAgain }) => {
             >
               {istyping ? (
                 <div>
-                  <Lottie
+                  {/* <Lottie
                     options={defaultOptions}
                     // height={50}
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
-                  />
+                  /> */} 
+                  typing....
                 </div>
               ) : (
                 <></>
@@ -99,7 +285,7 @@ const SingleChat = ({ fetchAgain, setfetchAgain }) => {
                 value={newMessage}
                 onChange={typingHandler}
               />
-            </FormControl> */}
+            </FormControl>
           </Box>
         </>
       ) : (

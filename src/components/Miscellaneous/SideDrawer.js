@@ -21,6 +21,7 @@ import {
   DrawerCloseButton,
   useToast,
 } from "@chakra-ui/react";
+import NotificationBadge, { Effect } from "react-notification-badge";
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { FaSearch } from "react-icons/fa";
@@ -29,9 +30,10 @@ import ProfileModel from "./ProfileModel";
 import { useHistory } from "react-router-dom";
 import { useDisclosure } from "@chakra-ui/hooks";
 import axios, * as others from "axios";
-import Chatloading from "../chatloading";
+import Chatloading from "../Chatloading";
 import UserListItem from "../userAvatar/userListItem";
 import { Spinner } from "@chakra-ui/spinner";
+import { getSender } from "../../config/ChatLogics";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -41,14 +43,22 @@ const SideDrawer = () => {
 
   const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { user, setSelectedChat, chats, setChats } = ChatState();
+  const {
+    user,
+    setSelectedChat,
+    chats,
+    setChats,
+    notification,
+    setNotification,
+  } = ChatState();
 
+  const toast = useToast();
+
+  // logged out user.
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
     history.push("/");
   };
-
-  const toast = useToast();
 
   // to access the chats
   const accessChat = async (userId) => {
@@ -68,11 +78,15 @@ const SideDrawer = () => {
         config
       );
 
+      // chats is an array, find is an function of array and it is checking each element and
+      // if the current returned chat is already present in array, it will return true and don't push that chat into chats array.
       if (!chats.find((c) => c._id === data._id)) {
         setChats([data, ...chats]);
       }
+      
       setSelectedChat(data);
       setloadingChat(false);
+      // why this
       onClose();
     } catch (error) {
       toast({
@@ -161,9 +175,28 @@ const SideDrawer = () => {
         <div>
           <Menu>
             <MenuButton p={1}>
+              <NotificationBadge
+                count={notification.length}
+                effect={Effect.SCALE}
+              />
               <BellIcon fontSize="2*1" m={1} />
             </MenuButton>
-            {/* <MenuList></MenuList> */}
+            <MenuList pl={2}>
+              {!notification.length && "No New Messages"}
+              {notification.map((notif) => (
+                <MenuItem
+                  key={notif._id}
+                  onClick={() => {
+                    setSelectedChat(notif.chat);
+                    setNotification(notification.filter((n) => n !== notif));
+                  }}
+                >
+                  {notif.chat.isGroupChat
+                    ? `New Message in ${notif.chat.chatName}`
+                    : `New Message from ${getSender(user, notif.chat.users)}`}
+                </MenuItem>
+              ))}
+            </MenuList>
           </Menu>
           {/* user profile */}
           <Menu>
@@ -186,15 +219,10 @@ const SideDrawer = () => {
         </div>
       </Box>
 
-    {/* don't understand */}
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">
-            Create your account
-          </DrawerHeader>
-
           {/* searching doctor functionality */}
           <DrawerBody>
             <Box display="flex" pb={2}>
@@ -204,7 +232,11 @@ const SideDrawer = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button variant="outline" mr={3} onClick={handleSearch}>
+              <Button
+                variant="outline"
+                mr={3}
+                onClick={handleSearch}
+              >
                 Go
               </Button>
             </Box>
@@ -221,12 +253,10 @@ const SideDrawer = () => {
             )}
           </DrawerBody>
           {loadingChat && <Spinner ml="auto" display="flex" />}
-          {/* save button is not working */}
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

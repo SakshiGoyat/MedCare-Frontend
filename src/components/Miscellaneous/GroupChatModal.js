@@ -1,3 +1,4 @@
+// to make a new group
 import React, { useState } from "react";
 import {
   Modal,
@@ -14,26 +15,30 @@ import {
   Input,
   Box,
 } from "@chakra-ui/react";
+
 import { ChatState } from "../../Context/chatProvider";
 import UserListItem from "../userAvatar/userListItem";
-
 import axios, * as others from "axios";
 import UserBadgeItem from "../userAvatar/UserBadgeItem";
+import Chatloading from "../Chatloading";
 
 const GroupChatModal = ({ children }) => {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [groupChatName, setGroupChatName] = useState();
-  const [selectedUsers, setSelectedUsers] = useState([]);
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const [groupChatName, setGroupChatName] = useState("");
+  const [selectedUsers, setSelectedUsers] = useState([]); 
+  const [search, setSearch] = useState(""); // why is it needed.
+  const [searchResult, setSearchResult] = useState([]); // why is it needed.
   const [loading, setloading] = useState(false);
 
   const toast = useToast();
 
   const { user, chats, setChats } = ChatState();
 
+  // to search the user.
   const handleSearch = async (query) => {
+    // why setSearch is needed
     setSearch(query);
 
     if (!query) {
@@ -48,7 +53,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.get(`http://localhost:5000/api/user?search=${search}`, config);
-      console.log(data);
+      // console.log(data);
       setloading(false);
       setSearchResult(data);
     } catch (error) {
@@ -60,11 +65,11 @@ const GroupChatModal = ({ children }) => {
         isClosable: true,
         position: "bottom-left",
       });
-
       console.log(error);
     }
   };
 
+  // to make the new group
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
       toast({
@@ -114,6 +119,7 @@ const GroupChatModal = ({ children }) => {
     }
   };
 
+  // to add a new user
   const handleGroup = (userToAdd) => {
     if (selectedUsers.includes(userToAdd)) {
       toast({
@@ -129,19 +135,20 @@ const GroupChatModal = ({ children }) => {
     setSelectedUsers([...selectedUsers, userToAdd]);
   };
 
+  // to delete the selected user
   const handleDelete = (delUser) => {
     setSelectedUsers(selectedUsers.filter((sel) => sel._id !== delUser._id));
   };
+
   return (
     <>
       <span onClick={onOpen}>{children}</span>
-
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
             fontSize="35px"
-            fontFamily="Work sans"
+            fontFamily="ubuntu"
             display="flex"
             justifyContent="center"
           >
@@ -150,19 +157,23 @@ const GroupChatModal = ({ children }) => {
           <ModalCloseButton />
           <ModalBody display="flex" flexDir="column" alignItems="center">
             <FormControl>
+            {/* working proper */}
+            {/* setting name of the group */}
               <Input
                 placeholder="Chat Name"
                 mb={3}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />
             </FormControl>
+            {/* adding users */}
             <FormControl>
               <Input
-                placeholder="Add Users eg: John, Piyush, Jane"
+                placeholder="Add Users eg: Sakshi, Ishita, Bhavit."
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
+            {/* deleting the user */}
             <Box w="100%" display="flex" flexWrap="wrap">
               {selectedUsers.map((u) => (
                 <UserBadgeItem
@@ -172,9 +183,10 @@ const GroupChatModal = ({ children }) => {
                 />
               ))}
             </Box>
+
+            {/* why this */}
             {loading ? (
-              // <ChatLoading />
-              <div>Loading...</div>
+                <Chatloading />
             ) : (
               searchResult
                 ?.slice(0, 4)
@@ -189,7 +201,7 @@ const GroupChatModal = ({ children }) => {
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
-              Close
+              Create Group
             </Button>
           </ModalFooter>
         </ModalContent>

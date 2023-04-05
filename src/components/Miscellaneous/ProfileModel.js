@@ -14,14 +14,14 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ViewIcon } from "@chakra-ui/icons";
-import { useHistory } from "react-router-dom";
 
 const ProfileModel = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log(user);
+  // console.log(user);
   return (
     <>
+    {/* to get the heading of the profile */}
       {children ? (
         <span onClick={onOpen}>{children}</span>
       ) : (
@@ -55,17 +55,8 @@ const ProfileModel = ({ user, children }) => {
             src={user.image}
             alt={user.name}
           />
+          
           {/* showing name */}
-          {/* <ModalBody
-            display="flex"
-            flexDir="column"
-            marginLeft="0rem"
-            justifyContent="space-between"
-            fontSize="2rem"
-          >
-            Name: {user.name}
-          </ModalBody> */}
-
           <Text
             fontSize={{ base: "2rem", md: "30px" }}
             fontFamily="ubuntu"

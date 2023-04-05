@@ -18,11 +18,12 @@ const HomePage = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
- 
+    console.log("user home 1 ", user);
     if (user) {
+      console.log("user home 2 ", user);
       history.push("/chats");
     }
-  }, [history]);
+  }, [history]); // removed history.
 
   return (
     <Container maxW="xl" centerContent>
@@ -37,8 +38,9 @@ const HomePage = () => {
         borderRadius="lg"
         borderWidth="1px"
       >
+      {/* home page website name */}
         <Text fontSize="4xl" fontFamily="Montserrat" color="black">
-          MedPlus
+          MedCare
         </Text>
       </Box>
 

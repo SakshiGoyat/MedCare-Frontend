@@ -4,15 +4,16 @@ import { ChatState } from "../Context/chatProvider";
 import { Box, Stack, Text } from "@chakra-ui/layout";
 import axios, * as others from "axios";
 import { AddIcon } from "@chakra-ui/icons";
-import chatloading from "./chatloading";
 
 import { getSender } from "../config/ChatLogics";
 import GroupChatModal from "./Miscellaneous/GroupChatModal";
+import Chatloading from "./Chatloading";
 
 const MyChats = ({fetchAgain}) => {
-  const [loggedUser, setloggedUser] = useState();
+  const [loggedUser, setloggedUser] = useState("");
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
+  // console.log("chats in mychats ", chats);
   const toast = useToast();
 
   const fetchChats = async () => {
@@ -28,7 +29,7 @@ const MyChats = ({fetchAgain}) => {
         "http://localhost:5000/api/chat/",
         config
       );
-      console.log(data);
+      // console.log(data);
       setChats(data);
     } catch (error) {
       toast({
@@ -71,6 +72,7 @@ const MyChats = ({fetchAgain}) => {
         alignItems="center"
       >
         My Chats
+        {/* to create the new group */}
         <GroupChatModal>
           <Button
             d="flex"
@@ -121,7 +123,7 @@ const MyChats = ({fetchAgain}) => {
             ))}
           </Stack>
         ) : (
-          <chatloading />
+          <Chatloading />
         )}
       </Box>
     </Box>

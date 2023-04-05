@@ -1,3 +1,4 @@
+// SideDrawer, MyChats, ChatBox
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { ChatState } from "../Context/chatProvider";
@@ -8,6 +9,7 @@ import SideDrawer from "../components/Miscellaneous/SideDrawer";
 const ChatPage = () => {
   // getting user data
   const { user } = ChatState();
+  // why fetchAgain and setfetchAgain
   const [fetchAgain, setfetchAgain] = useState(false);
   // console.log("user details: ",user);
   return (

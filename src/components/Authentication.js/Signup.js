@@ -14,7 +14,7 @@ import axios, * as others from "axios";
 
 const Signup = () => {
   const [show, setShow] = useState(false);
-  const [show1, setShow1] = useState();
+  const [show1, setShow1] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

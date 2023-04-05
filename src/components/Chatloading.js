@@ -1,7 +1,7 @@
 import { Skeleton, Stack } from '@chakra-ui/react'
 import React from 'react'
 
-const chatloading = () => {
+const Chatloading = () => {
   return (
     <Stack>
       <Skeleton height="3rem" />
@@ -16,4 +16,4 @@ const chatloading = () => {
   );
 }
 
-export default chatloading
+export default Chatloading
