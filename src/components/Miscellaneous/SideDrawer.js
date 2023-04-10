@@ -1,5 +1,4 @@
 // sidedrawer is handling: profile section, search section,
-
 import React, { useState } from "react";
 import {
   Box,
@@ -168,7 +167,7 @@ const SideDrawer = () => {
           </Button>
         </Tooltip>
 
-        <Text fontSize="2*1" fontFamily="ubuntu">
+        <Text fontSize="4*1" fontFamily="ubuntu">
           MedCare
         </Text>
 
@@ -182,20 +181,30 @@ const SideDrawer = () => {
               <BellIcon fontSize="2*1" m={1} />
             </MenuButton>
             <MenuList pl={2}>
-              {!notification.length && "No New Messages"}
-              {notification.map((notif) => (
-                <MenuItem
-                  key={notif._id}
-                  onClick={() => {
-                    setSelectedChat(notif.chat);
-                    setNotification(notification.filter((n) => n !== notif));
-                  }}
-                >
-                  {notif.chat.isGroupChat
-                    ? `New Message in ${notif.chat.chatName}`
-                    : `New Message from ${getSender(user, notif.chat.users)}`}
-                </MenuItem>
-              ))}
+              {!notification.length ? (
+                "No New Messages"
+              ) : (
+                <>
+                  {notification.map((notif) => (
+                    <MenuItem
+                      key={notif._id}
+                      onClick={() => {
+                        setSelectedChat(notif.chat);
+                        setNotification(
+                          notification.filter((n) => n !== notif)
+                        );
+                      }}
+                    >
+                      {notif.chat.isGroupChat
+                        ? `New Message in ${notif.chat.chatName}`
+                        : `New Message from ${getSender(
+                            user,
+                            notif.chat.users
+                          )}`}
+                    </MenuItem>
+                  ))}
+                </>
+              )}
             </MenuList>
           </Menu>
           {/* user profile */}
@@ -232,11 +241,7 @@ const SideDrawer = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button
-                variant="outline"
-                mr={3}
-                onClick={handleSearch}
-              >
+              <Button mr={3} colorScheme="blue" onClick={handleSearch}>
                 Go
               </Button>
             </Box>

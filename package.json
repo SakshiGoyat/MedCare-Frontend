@@ -8,6 +8,7 @@
     "@chakra-ui/react": "^2.5.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@glidejs/glide": "^3.6.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -24,6 +25,7 @@
     "socket.io-client": "^4.6.1",
     "stream-chat": "^8.4.1",
     "stream-chat-react": "^10.7.3",
+    "swiper": "^9.2.0",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4"
   },

@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Kavoon&family=Lobster&family=Montserrat+Alternates:wght@900&family=Montserrat:ital,wght@1,600&family=Pacifico&family=Ubuntu&display=swap");
 
-.App {
+/* .App {
   min-height: 100vh;
   display: flex;
   background-image: url("../public/images/health2.jpg");
   background-size: cover;
   background-position: center;
   color: "black";
-}
+} */
 
 ::-webkit-scrollbar {
   width: 0px;

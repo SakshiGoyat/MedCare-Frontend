@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Container,
@@ -9,8 +9,8 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import Signup from "../components/Authentication.js/Signup";
-import Signin from "../components/Authentication.js/Signin";
+import Signup from "../../components/Authentication.js/Signup";
+import Signin from "../../components/Authentication.js/Signin";
 import { useHistory } from "react-router-dom";
 
 const HomePage = () => {
@@ -38,7 +38,7 @@ const HomePage = () => {
         borderRadius="lg"
         borderWidth="1px"
       >
-      {/* home page website name */}
+        {/* home page website name */}
         <Text fontSize="4xl" fontFamily="Montserrat" color="black">
           MedCare
         </Text>
