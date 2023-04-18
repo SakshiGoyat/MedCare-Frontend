@@ -21,7 +21,12 @@ const Header = () => {
         pl="8rem"
       >
         <div className="logo">
-          <img src="/images/logoRed.png" alt="logo" height="50px" width="60px" />
+          <img
+            src="/images/logoRed.png"
+            alt="logo"
+            height="50px"
+            width="60px"
+          />
           <h1>MedCare</h1>
         </div>
 
@@ -36,10 +41,10 @@ const Header = () => {
             <Link to={"/doctors"} className="homePageLinks">
               <h2>Our Doctors</h2>
             </Link>
-            <Link to={"/signd"} className="homePageLinks">
+            <Link to={"/registerD"} className="homePageLinks">
               <h2>Doctor Registration</h2>
             </Link>
-            <Link to={"/signp"} className="homePageLinks">
+            <Link to={"/registerP"} className="homePageLinks">
               <h2>Patient Registration</h2>
             </Link>
           </Flex>

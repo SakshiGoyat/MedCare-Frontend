@@ -211,11 +211,11 @@ const About = () => {
                 <div className="swiper__content1">
                   <h1>What our users have to say</h1>
                   <span>
-                    Jason: "The online health chat website was easy to use and
+                    The online health chat website was easy to use and
                     had a lot of resources available. I was able to get answers
                     to my questions quickly and efficiently. It was a great way
                     to get medical advice without having to wait on hold for a
-                    long time."
+                    long time.
                   </span>
                   <div className="swiper__footer1">
                     <img src="/images/user2.png" className="avatar" />

@@ -1,0 +1,81 @@
+body {
+  font-weight: 400;
+  line-height: 1.666;
+}
+
+.doctor__main{
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+}
+
+.doctor__name{
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    color: #030c46;
+}
+
+.dictionary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  /* max-width: 90%; */
+}
+
+/* .container {
+  background-color: rgb(233, 243, 246);
+  padding: 5px 0 0 0;
+} */
+
+.h2_class {
+  color: #030c46;
+  line-height: 1;
+}
+
+.h2_class span {
+  font-size: 200%;
+  font-weight: 900;
+}
+
+.layout {
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.h3_class {
+  font-size: 92.5%;
+  margin-left: 0;
+}
+
+.h3_class .h2_class {
+  font-weight: 600;
+  font-size: inherit;
+}
+
+.h3_class {
+  font-weight: 700;
+  font-size: 110%;
+  letter-spacing: 0.33px;
+  max-width: 20rem;
+  margin-top: 0;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.depart {
+  font-size: x-large;
+}
+
+/* for image */
+.Image {
+  height: 300px;
+  width: 300px;
+  border-radius: 1rem;
+  filter: brightness(120%);
+  filter: contrast(120%);
+  filter: drop-shadow(10px 10px 10px grey);
+}
+
+.Total-content {
+  margin: 4rem 19rem auto;
+}
