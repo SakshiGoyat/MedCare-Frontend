@@ -60,7 +60,7 @@ const About = () => {
         </div>
         <div className="about__sections">
           <div>
-            <img src="/images/connect.svg" alt="" />
+            <img src="/images/connect.png" alt="" className="about__image" />
             <h1>Connect</h1>
             <h4>
               We understand healthcare goes beyond signs, symptoms, diagnosis,
@@ -70,7 +70,7 @@ const About = () => {
             </h4>
           </div>
           <div>
-            <img src="/images/trust.svg" alt="" />
+            <img src="/images/trust.png" alt="" className="about__image" />
             <h1>Trust</h1>
             <h4>
               We work on trust. We are aware of the responsibility placed on us
@@ -79,7 +79,11 @@ const About = () => {
             </h4>
           </div>
           <div>
-            <img src="/images/transparency.svg" alt="" />
+            <img
+              src="/images/transparency.png"
+              alt=""
+              className="about__image"
+            />
             <h1>Transparency</h1>
             <h4>
               We believe in full disclosure. We believe in communicating openly
@@ -211,11 +215,11 @@ const About = () => {
                 <div className="swiper__content1">
                   <h1>What our users have to say</h1>
                   <span>
-                    The online health chat website was easy to use and
-                    had a lot of resources available. I was able to get answers
-                    to my questions quickly and efficiently. It was a great way
-                    to get medical advice without having to wait on hold for a
-                    long time.
+                    The online health chat website was easy to use and had a lot
+                    of resources available. I was able to get answers to my
+                    questions quickly and efficiently. It was a great way to get
+                    medical advice without having to wait on hold for a long
+                    time.
                   </span>
                   <div className="swiper__footer1">
                     <img src="/images/user2.png" className="avatar" />

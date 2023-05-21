@@ -8,7 +8,9 @@
   background-position: center;
   color: "black";
 } */
-
+body{
+  overflow-x: hidden;
+}
 ::-webkit-scrollbar {
   width: 0px;
 }

@@ -130,6 +130,14 @@ const Signin = () => {
         >
           Get Guest User Credentials
         </Button>
+        <Button
+          // variant="solid"
+          // colorScheme="blue"
+          color="grey"
+          width="100%"
+        >
+          Go Back
+        </Button>
       </VStack>
     </div>
   );

@@ -30,9 +30,8 @@ function Doctor() {
     <div>
       <Header />
       <div className="doctor__main">
-        <h1 className="doctor__name">
-          Our Doctors
-        </h1>
+        <h1 className="doctor__name">A doctor is a person next to god.</h1>
+        {/* <h1 className="ourDoctors">Our Doctors</h1> */}
         <dl className="dictionary">{doctor_info.map(Doctor1)}</dl>
       </div>
 

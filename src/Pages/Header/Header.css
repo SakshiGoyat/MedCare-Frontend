@@ -2,10 +2,11 @@
     padding-right: 2rem;
 }
 .header{
-    background-color:red; 
+    /* background-color:red;  */
     display: absolute;
     position: fixed;
     top: 0;
+    z-index: 100;
 }
 
 .logo{

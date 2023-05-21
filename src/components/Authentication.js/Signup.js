@@ -35,6 +35,9 @@ const Signup = () => {
     setShow1(!show1);
   };
 
+  const goBack = () =>{
+    
+  }
   // to submit the request
   const submitHandler = async () => {
     setloading(true);
@@ -191,7 +194,7 @@ const Signup = () => {
           accept="image/*"
           onChange={handleImageChange}
         />
-        <Button onClick={handleImageUpload}>Upload Image</Button> 
+        <Button onClick={handleImageUpload}>Upload Image</Button>
         {imageUrl && <img src={imageUrl} alt="Uploaded" />}
       </FormControl>
 
@@ -203,6 +206,16 @@ const Signup = () => {
         isLoading={loading}
       >
         Sign up
+      </Button>
+      <Button
+        // colorScheme="blue"
+        color="grey"
+        width="100%"
+        style={{ marginTop: 15 }}
+        onClick={submitHandler}
+        isLoading={loading}
+      >
+        Go Back
       </Button>
     </VStack>
   );

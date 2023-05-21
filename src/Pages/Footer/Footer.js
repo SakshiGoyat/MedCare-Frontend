@@ -6,63 +6,63 @@ const Footer = () => {
       <section className="footer">
         <div className="box-container">
           <div className="box">
-            <h3>branches</h3>
+            <h3>Branches</h3>
             <a href="#">
               {" "}
-              <i className="fas fa-map-marker-alt"></i> mumbai{" "}
+              <i className="fas fa-map-marker-alt"></i> Mumbai{" "}
             </a>
             <a href="#">
               {" "}
-              <i className="fas fa-map-marker-alt"></i> jogeshwari{" "}
+              <i className="fas fa-map-marker-alt"></i> Delhi{" "}
             </a>
             <a href="#">
               {" "}
-              <i className="fas fa-map-marker-alt"></i> goregaon{" "}
+              <i className="fas fa-map-marker-alt"></i> Goregaon{" "}
             </a>
             <a href="#">
               {" "}
-              <i className="fas fa-map-marker-alt"></i> navi mumbai{" "}
+              <i className="fas fa-map-marker-alt"></i> Patiala{" "}
             </a>
             <a href="#">
               {" "}
-              <i className="fas fa-map-marker-alt"></i> andheri{" "}
-            </a>
-          </div>
-
-          <div className="box">
-            <h3>quick links</h3>
-            <a href="#">
-              {" "}
-              <i className="fas fa-arrow-right"></i> home{" "}
-            </a>
-            <a href="#">
-              {" "}
-              <i className="fas fa-arrow-right"></i> service{" "}
-            </a>
-            <a href="#">
-              {" "}
-              <i className="fas fa-arrow-right"></i> about{" "}
-            </a>
-            <a href="#">
-              {" "}
-              <i className="fas fa-arrow-right"></i> gallery{" "}
-            </a>
-            <a href="#">
-              {" "}
-              <i className="fas fa-arrow-right"></i> price{" "}
-            </a>
-            <a href="#">
-              {" "}
-              <i className="fas fa-arrow-right"></i> reivew{" "}
-            </a>
-            <a href="#">
-              {" "}
-              <i className="fas fa-arrow-right"></i> contact{" "}
+              <i className="fas fa-map-marker-alt"></i> Chandigarh{" "}
             </a>
           </div>
 
           <div className="box">
-            <h3>contact info</h3>
+            <h3>Quick links</h3>
+            <a href="#">
+              {" "}
+              <i className="fas fa-arrow-right"></i> Home{" "}
+            </a>
+            <a href="#">
+              {" "}
+              <i className="fas fa-arrow-right"></i> About{" "}
+            </a>
+            <a href="#">
+              {" "}
+              <i className="fas fa-arrow-right"></i> Our doctors{" "}
+            </a>
+            <a href="#">
+              {" "}
+              <i className="fas fa-arrow-right"></i> Gallery{" "}
+            </a>
+            <a href="#">
+              {" "}
+              <i className="fas fa-arrow-right"></i> Price{" "}
+            </a>
+            <a href="#">
+              {" "}
+              <i className="fas fa-arrow-right"></i> Review{" "}
+            </a>
+            <a href="#">
+              {" "}
+              <i className="fas fa-arrow-right"></i> Contact{" "}
+            </a>
+          </div>
+
+          <div className="box">
+            <h3>Contact information</h3>
             <a href="#">
               {" "}
               <i className="fas fa-phone"></i> +123-456-7890{" "}
@@ -86,29 +86,29 @@ const Footer = () => {
           </div>
 
           <div className="box">
-            <h3>follow us</h3>
+            <h3>Follow us</h3>
             <a href="#">
               {" "}
-              <i className="fab fa-facebook-f"></i> facebook{" "}
+              <i className="fab fa-facebook-f"></i> Facebook{" "}
             </a>
             <a href="#">
               {" "}
-              <i className="fab fa-twitter"></i> twitter{" "}
+              <i className="fab fa-twitter"></i> Twitter{" "}
             </a>
             <a href="#">
               {" "}
-              <i className="fab fa-instagram"></i> instagram{" "}
+              <i className="fab fa-instagram"></i> Instagram{" "}
             </a>
             <a href="#">
               {" "}
-              <i className="fab fa-linkedin"></i> linkedin{" "}
+              <i className="fab fa-linkedin"></i> Linkedin{" "}
             </a>
           </div>
         </div>
 
         <div className="credit">
           {" "}
-          Copyright @2023, Practo. All rights reserved.{" "}
+          Copyright @2023, MedCare. All rights reserved.{" "}
         </div>
       </section>
     </>

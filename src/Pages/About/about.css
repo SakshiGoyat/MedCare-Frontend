@@ -51,6 +51,9 @@
   margin-bottom: 1rem;
 }
 
+.about__image{
+  color:rgb(205, 95, 59)
+}
 .testimonial {
   margin: 5rem 0 0 0;
 }
