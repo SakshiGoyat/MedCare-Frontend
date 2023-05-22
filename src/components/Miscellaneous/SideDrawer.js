@@ -167,7 +167,7 @@ const SideDrawer = () => {
           </Button>
         </Tooltip>
 
-        <Text fontSize="4*1" fontFamily="ubuntu">
+        <Text fontSize="40px" fontFamily="ubuntu">
           MedCare
         </Text>
 
@@ -241,7 +241,7 @@ const SideDrawer = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <Button mr={3} colorScheme="blue" onClick={handleSearch}>
+              <Button mr={-1} colorScheme="blue" onClick={handleSearch}>
                 Go
               </Button>
             </Box>

@@ -9,8 +9,8 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import Signup from "../../components/Authentication.js/Signup";
-import Signin from "../../components/Authentication.js/Signin";
+import Signup from "../../components/Authentication.js/SignupD";
+import Signin from "../../components/Authentication.js/SigninD";
 import { useHistory } from "react-router-dom";
 
 import "./styles.css";

@@ -15,17 +15,17 @@ export default function Section1() {
             <div className="about__card">
               <SiAsciidoctor className="about__icon" />
               <h5>A+ Doctors</h5>
-              <small>Lorem ipsum done</small>
+              <small>Best doctors from all over India</small>
             </div>
             <div className="about__card">
               <AiFillMedicineBox className="about__icon" />
               <h5>Consultation</h5>
-              <small>Lorem ipsum done</small>
+              <small>24*7 consulation available</small>
             </div>
             <div className="about__card">
               <FaComments className="about__icon" />
               <h5>Chatting</h5>
-              <small>Lorem ipsum done</small>
+              <small>Chat with doctors anytime</small>
             </div>
           </div>
 

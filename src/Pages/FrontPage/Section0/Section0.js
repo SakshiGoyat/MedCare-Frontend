@@ -5,7 +5,6 @@ const Section0 = () => {
   return (
     <div className="section0">
       <div className="section0Main">
-        {/* <img src="/images/services.png" alt="" /> */}
       </div>
     </div>
   );
