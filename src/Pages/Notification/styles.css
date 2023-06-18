@@ -1,0 +1,20 @@
+body {
+  height: 100vh;
+}
+.h1{
+    margin-top:8rem;
+    display: flex;
+    font-weight: 400;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabs{
+    padding: 2rem;
+}
+.notificationFooter {
+
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}

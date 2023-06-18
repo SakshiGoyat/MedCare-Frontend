@@ -1,3 +1,4 @@
+// show all the groups and chats user part of at the left side.
 import { Button, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { ChatState } from "../Context/chatProvider";
@@ -29,6 +30,8 @@ const MyChats = ({fetchAgain}) => {
         "http://localhost:5000/api/chat/",
         config
       );
+
+      //data is having all chats
       // console.log(data);
       setChats(data);
     } catch (error) {

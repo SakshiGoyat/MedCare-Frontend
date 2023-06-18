@@ -22,9 +22,7 @@ const RegistrationD = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
-    console.log("user home 1 ", user);
     if (user) {
-      console.log("user home 2 ", user);
       history.push("/chats");
     }
   }, [history]); // removed history.

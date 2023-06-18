@@ -13,10 +13,8 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
-
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const LoginD = () => {
   const toast = useToast();
@@ -28,13 +26,15 @@ const LoginD = () => {
   // const { user } =ChatState();
 
   const [loading, setLoading] = useState(false);
-
   const history = useHistory();
 
   const handleClick = () => {
     setShow(!show);
   };
 
+  const goBack = () => {
+    history.push("/");
+  };
   //   const postDetails = (pics) => {};
 
   const submitHandler = async () => {
@@ -128,13 +128,9 @@ const LoginD = () => {
         // colorScheme="indigo"
         width="100%"
         color="#030c46"
-        onClick={() => {
-          setEmail("guest@gmail.com");
-          setPassword("1234");
-        }}
-        // isLoading={picLoading}
+        onClick={goBack}
       >
-        <Link to="/">Go to Home Page</Link>
+        Go to Home Page
       </Button>
     </VStack>
   );

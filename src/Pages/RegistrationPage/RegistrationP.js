@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 
 import "./styles.css";
 
-import Header from "../Header/Header";
+// import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
 const RegistrationP = () => {
@@ -23,16 +23,15 @@ const RegistrationP = () => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
-    console.log("user home 1 ", user);
+    localStorage.clear();
     if (user) {
-      console.log("user home 2 ", user);
-      history.push("/chats");
+      history.push("/home");
     }
   }, [history]); // removed history.
 
   return (
     <div className="container1">
-    <Header />
+    {/* <Header /> */}
       <Container maxW="xl" centerContent className="container2">
         <Box
           d="flex"

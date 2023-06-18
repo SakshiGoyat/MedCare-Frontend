@@ -10,8 +10,9 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios, * as others from "axios";
 
+// import axios, * as others from "axios";
+import axios from "axios";
 const Signup = () => {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
@@ -35,9 +36,9 @@ const Signup = () => {
     setShow1(!show1);
   };
 
-  const goBack = () =>{
-    
-  }
+  // const goBack = () => {
+  //   history.push("/");
+  // };
   // to submit the request
   const submitHandler = async () => {
     setloading(true);
@@ -67,7 +68,6 @@ const Signup = () => {
     }
 
     try {
-      console.log(2);
       const res = await axios.post(
         "http://localhost:5000/api/user/",
         {
@@ -82,20 +82,33 @@ const Signup = () => {
           },
         }
       );
-      console.log(3);
-      // send all data from backend.
-      // console.log(res);
-      localStorage.setItem("userInfo", JSON.stringify(res.data));
-      console.log(JSON.parse(localStorage.getItem("userInfo")));
-      toast({
-        title: "Registration successfull",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setloading(false);
-      history.push("/chats");
+
+      if (res.data.success === true) {
+        localStorage.setItem("userInfo", JSON.stringify(res.data.message));
+        console.log(JSON.parse(localStorage.getItem("userInfo")));
+        toast({
+          title: "Registration successfull",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+        setloading(false);
+        // history.push("/chats");
+        history.push("/home");
+        // window.location.reload();
+      } else {
+        toast({
+          title: "Error occured.",
+          description: res.data.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+        setloading(false);
+        console.log(res.data.message);
+      }
     } catch (error) {
       toast({
         title: "Error occured.",
@@ -207,16 +220,16 @@ const Signup = () => {
       >
         Sign up
       </Button>
-      <Button
+      {/* <Button
         // colorScheme="blue"
         color="grey"
         width="100%"
         style={{ marginTop: 15 }}
-        onClick={submitHandler}
+        onClick={goBack}
         isLoading={loading}
       >
         Go Back
-      </Button>
+      </Button> */}
     </VStack>
   );
 };

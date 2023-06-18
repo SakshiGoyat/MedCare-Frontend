@@ -1,9 +1,10 @@
+// box where chat is happening
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { ChatState } from "../Context/chatProvider";
 import SingleChat from "./SingleChat";
 
-const ChatBox = ({fetchAgain, setfetchAgain}) => {
+const ChatBox = ({ fetchAgain, setfetchAgain }) => {
   const { selectedChat } = ChatState();
 
   return (

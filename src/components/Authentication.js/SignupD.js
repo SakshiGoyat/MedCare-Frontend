@@ -14,8 +14,9 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 const SignupD = () => {
   const toast = useToast();
   const [show, setShow] = useState();
@@ -42,13 +43,15 @@ const SignupD = () => {
     YoE: "",
   });
   const [loading, setLoading] = useState();
-
   const history = useHistory();
 
   const handleClick = () => {
     setShow(!show);
   };
 
+  const goBack = () => {
+    history.push("/");
+  };
   const submitHandler = async () => {
     setLoading(true);
     if (
@@ -209,212 +212,175 @@ const SignupD = () => {
         />
       </FormControl>
 
-      
-        <FormControl id='Password' isRequired>
-            <FormLabel>Password</FormLabel>
-            <InputGroup>
-            <Input
-            type={show?"text":"password"}
+      <FormControl id="Email" isRequired>
+        <FormLabel>Email</FormLabel>
+        <Input
+          placeholder="Enter your Email"
+          name="email"
+          value={user.email}
+          onChange={handleInputs}
+        />
+      </FormControl>
+
+      <FormControl id="Password" isRequired>
+        <FormLabel>Password</FormLabel>
+        <InputGroup>
+          <Input
+            type={show ? "text" : "password"}
             placeholder="Enter your Password"
             name="password"
             value={user.password}
-            
             onChange={handleInputs}
-            />
+          />
 
-            <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show?"Hide":"Show"}
+          <InputRightElement width="4.5rem">
+            <Button h="1.75rem" size="sm" onClick={handleClick}>
+              {show ? "Hide" : "Show"}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      </FormControl>
 
-                </Button>
-            
-            </InputRightElement>
-            </InputGroup>
-            
-        </FormControl>
-
-        <FormControl id='Cpassword' isRequired>
-            <FormLabel>Confirm password</FormLabel>
-            <InputGroup>
-            <Input
-            type={show?"text":"password"}
+      <FormControl id="Cpassword" isRequired>
+        <FormLabel>Confirm password</FormLabel>
+        <InputGroup>
+          <Input
+            type={show ? "text" : "password"}
             placeholder="Enter your comfirmed Password"
             name="Cpassword"
             value={user.Cpassword}
-            
             onChange={handleInputs}
-            />
+          />
 
-            <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show?"Hide":"Show"}
+          <InputRightElement width="4.5rem">
+            <Button h="1.75rem" size="sm" onClick={handleClick}>
+              {show ? "Hide" : "Show"}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      </FormControl>
 
-                </Button>
-            
-            </InputRightElement>
-            </InputGroup>
-        </FormControl>
+      <FormControl id="Phonono" isRequired>
+        <FormLabel>Phonono</FormLabel>
+        <Input
+          placeholder="Enter your Phonono"
+          name="phoneno"
+          value={user.phoneno}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
-        <FormControl id='Phonono' isRequired>
-            <FormLabel>Phonono</FormLabel>
-            <Input
-            placeholder="Enter your Phonono"
-            name="phoneno"
-            value={user.phoneno}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
-
-        <FormControl id='Email' isRequired>
-            <FormLabel>Email</FormLabel>
-            <Input
-            placeholder="Enter your Email"
-            name="email"
-            value={user.email}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
-
-        <FormControl id='Gender' isRequired>
-            <FormLabel>Gender</FormLabel>
-            <Input
-            placeholder="Enter your Gender"
-            name="gender"
-            value={user.gender}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
-
-
-
-
-        <FormControl id="pic">
+      <FormControl id="Gender" isRequired>
+        <FormLabel>Gender</FormLabel>
+        <Input
+          placeholder="Enter your Gender"
+          name="gender"
+          value={user.gender}
+          onChange={handleInputs}
+        />
+      </FormControl>
+      <FormControl id="pic">
         <FormLabel>Upload your picture </FormLabel>
         <Input
-            type="file"
-            p={1.5}
-            accept="image/*"
-            value={user.pic}
-            onChange={handleImageChange}
+          type="file"
+          p={1.5}
+          accept="image/*"
+          value={user.pic}
+          onChange={handleImageChange}
         />
-        <Button onClick={handleImageUpload}>Upload Image</Button> 
+        <Button onClick={handleImageUpload}>Upload Image</Button>
         {imageUrl && <img src={imageUrl} alt="Uploaded" />}
-        
-        </FormControl>
+      </FormControl>
 
+      <FormControl id="City" isRequired>
+        <FormLabel>City</FormLabel>
+        <Input
+          placeholder="Enter your City"
+          name="city"
+          value={user.city}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
+      <FormControl id="Age" isRequired>
+        <FormLabel>Age</FormLabel>
+        <Input
+          placeholder="Enter your Age"
+          name="age"
+          value={user.age}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
-        <FormControl id='City' isRequired>
-            <FormLabel>City</FormLabel>
-            <Input
-            placeholder="Enter your City"
-            name="city"
-            value={user.city}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
+      <FormControl id="Aadhaarno" isRequired>
+        <FormLabel>AadhaarNo</FormLabel>
+        <Input
+          placeholder="Enter your AadhaarNo"
+          name="aadhaarno"
+          value={user.aadhaarno}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
-        <FormControl id='Age' isRequired>
-            <FormLabel>Age</FormLabel>
-            <Input
-            placeholder="Enter your Age"
-            name="age"
-            value={user.age}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
+      <FormControl id="registrationNo" isRequired>
+        <FormLabel>registrationNo</FormLabel>
+        <Input
+          placeholder="Enter your registrationNo"
+          name="registrationNo"
+          value={user.registrationNo}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
-        
-        <FormControl id='Aadhaarno' isRequired>
-            <FormLabel>AadhaarNo</FormLabel>
-            <Input
-            placeholder="Enter your AadhaarNo"
-            name="aadhaarno"
-            value={user.aadhaarno}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
+      <FormControl id="registrationCouncil" isRequired>
+        <FormLabel>registrationCouncil</FormLabel>
+        <Input
+          placeholder="Enter your registrationCouncil"
+          name="registrationCouncil"
+          value={user.registrationCouncil}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
+      <FormControl id="registrationYear" isRequired>
+        <FormLabel>registrationYear</FormLabel>
+        <Input
+          placeholder="Enter your registrationYear"
+          name="registrationYear"
+          value={user.registrationYear}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
-        <FormControl id='registrationNo' isRequired>
-            <FormLabel>registrationNo</FormLabel>
-            <Input
-            placeholder="Enter your registrationNo"
-            name="registrationNo"
-            value={user.registrationNo}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
+      <FormControl id="degree" isRequired>
+        <FormLabel>degree</FormLabel>
+        <Input
+          placeholder="Enter your degree"
+          name="degree"
+          value={user.degree}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
-        <FormControl id='registrationCouncil' isRequired>
-            <FormLabel>registrationCouncil</FormLabel>
-            <Input
-            placeholder="Enter your registrationCouncil"
-            name="registrationCouncil"
-            value={user.registrationCouncil}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
+      <FormControl id="institute" isRequired>
+        <FormLabel>institute</FormLabel>
+        <Input
+          placeholder="Enter your institute"
+          name="institute"
+          value={user.institute}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
-
-        <FormControl id='registrationYear' isRequired>
-            <FormLabel>registrationYear</FormLabel>
-            <Input
-            placeholder="Enter your registrationYear"
-            name="registrationYear"
-            value={user.registrationYear}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
-
-
-        <FormControl id='degree' isRequired>
-            <FormLabel>degree</FormLabel>
-            <Input
-            placeholder="Enter your degree"
-            name="degree"
-            value={user.degree}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
-
-
-        
-
-
-        <FormControl id='institute' isRequired>
-            <FormLabel>institute</FormLabel>
-            <Input
-            placeholder="Enter your institute"
-            name="institute"
-            value={user.institute}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
-
-
-
-        <FormControl id='YoC' isRequired>
-            <FormLabel>YoC</FormLabel>
-            <Input
-            placeholder="Enter your YoC"
-            name="YoC"
-            value={user.YoC}
-            
-            onChange={handleInputs}
-            />
-        </FormControl>
+      <FormControl id="YoC" isRequired>
+        <FormLabel>YoC</FormLabel>
+        <Input
+          placeholder="Enter your YoC"
+          name="YoC"
+          value={user.YoC}
+          onChange={handleInputs}
+        />
+      </FormControl>
 
       <FormControl id="YoE" isRequired>
         <FormLabel>YoE</FormLabel>
@@ -425,7 +391,7 @@ const SignupD = () => {
           onChange={handleInputs}
         />
       </FormControl>
-{/* 
+      {/* 
       for entering into the chat section -----------------------------------------*/}
       {/* {/* <Button
         colorScheme="blue"
@@ -434,7 +400,7 @@ const SignupD = () => {
         onClick={submitHandler}
         isLoading={loading}
 
-        >Sign Up</Button> */} 
+        >Sign Up</Button> */}
 
       {/* ------------------------------------------------------------------------- */}
       <Button
@@ -449,9 +415,9 @@ const SignupD = () => {
         // colorScheme="indigo"
         width="100%"
         color="#030c46"
-        // isLoading={picLoading}
+        onClick={goBack}
       >
-        <Link to="/">Go to Home Page</Link>
+        Go to Home Page
       </Button>
     </VStack>
   );

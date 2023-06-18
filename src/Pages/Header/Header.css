@@ -1,33 +1,41 @@
 .homePageLinks {
-    padding-right: 2rem;
+  padding-right: 2rem;
 }
-.header{
-    /* background-color:red;  */
-    display: absolute;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-}
-
-.logo{
-    display: flex;
-    line-height: 3.6rem;
+.header {
+  /* background-color:red;  */
+  display: absolute;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 }
 
-.logo h1{
-    color:#030c46;
-    font-size: 1.7rem;
-    font-weight: bold
-
+.logo {
+  display: flex;
+  line-height: 3.6rem;
 }
-.header h2{
-    color: #030c46;
+
+.logo h1 {
+  color: #030c46;
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding-top: 1rem;
+}
+.header h2 {
+  color: #030c46;
 }
 
 .header h2:hover {
-    display: block;
-    padding: 0 5px;
-    /* background-color: rgb(80, 199, 246); */
-    /* text-decoration: underline; */
-    /* letter-spacing: 2px; */
+  display: block;
+  padding: 0 5px;
+  /* background-color: rgb(80, 199, 246); */
+  /* text-decoration: underline; */
+  /* letter-spacing: 2px; */
+}
+.active h2{
+  color: red;
+  padding: 1px;
+}
+
+.userName{
+    padding-left: 1rem;
 }

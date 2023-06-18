@@ -9,24 +9,27 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
-import axios, * as others from "axios";
 
 const Signin = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setloading] = useState(false);
-  
-  const toast = useToast();
-  const history = useHistory();
 
+  const history = useHistory();
+  const toast = useToast();
+
+  // const goBack = () => {
+  //   history.push("/");
+  // };
   // to show and hide password
   const handleClick = () => {
     setShow(!show);
   };
 
-  // to submit the sign in 
+  // to submit the sign in
   const submitHandler = async () => {
     setloading(true);
     if (!email || !password) {
@@ -47,7 +50,7 @@ const Signin = () => {
           "Content-Type": "application/json",
         },
       };
-      const data = await axios.post(
+      const res = await axios.post(
         "http://localhost:5000/api/user/login",
         {
           email,
@@ -55,18 +58,35 @@ const Signin = () => {
         },
         config
       );
-      localStorage.setItem("userInfo", JSON.stringify(data.data));
-      
-      toast({
-        title: "Logged in successfull",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      
-      setloading(false);
-      history.push("/chats");
+
+      if (res.data.success === false) {
+        toast({
+          title: "Error occured.",
+          description: res.data.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+        setloading(false);
+        // window.location.reload();
+        console.log(res.data.message);
+        return;
+      } else {
+        localStorage.setItem("userInfo", JSON.stringify(res.data.message));
+        toast({
+          title: "Logged in successfully",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "bottom",
+        });
+
+        setloading(false);
+        // history.push("/chats");
+        history.push("/home");
+        // window.location.reload();
+      }
     } catch (error) {
       toast({
         title: "Error occured.",
@@ -130,14 +150,15 @@ const Signin = () => {
         >
           Get Guest User Credentials
         </Button>
-        <Button
+        {/* <Button
           // variant="solid"
           // colorScheme="blue"
           color="grey"
           width="100%"
+          onClick={goBack}
         >
           Go Back
-        </Button>
+        </Button> */}
       </VStack>
     </div>
   );

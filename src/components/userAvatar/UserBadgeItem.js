@@ -1,3 +1,4 @@
+// used in group chat 
 import { CloseIcon } from '@chakra-ui/icons';
 import { Badge } from '@chakra-ui/react';
 import React from 'react'
@@ -6,7 +7,8 @@ const UserBadgeItem = ({ user, handleFunction, admin }) => {
   return (
     <div>
       <Badge
-        px={2}
+        w="100%"
+        px={4}
         py={1}
         borderRadius="lg"
         m={1}

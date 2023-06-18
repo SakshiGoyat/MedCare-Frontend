@@ -20,19 +20,19 @@ import {
   DrawerCloseButton,
   useToast,
 } from "@chakra-ui/react";
-import NotificationBadge, { Effect } from "react-notification-badge";
+// import NotificationBadge, { Effect } from "react-notification-badge";
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { FaSearch } from "react-icons/fa";
 import { ChatState } from "../../Context/chatProvider";
 import ProfileModel from "./ProfileModel";
-import { useHistory } from "react-router-dom";
 import { useDisclosure } from "@chakra-ui/hooks";
 import axios, * as others from "axios";
 import Chatloading from "../Chatloading";
 import UserListItem from "../userAvatar/userListItem";
 import { Spinner } from "@chakra-ui/spinner";
 import { getSender } from "../../config/ChatLogics";
+import { useHistory } from "react-router-dom";
 
 const SideDrawer = () => {
   const [search, setSearch] = useState("");
@@ -40,7 +40,8 @@ const SideDrawer = () => {
   const [loading, setloading] = useState(false);
   const [loadingChat, setloadingChat] = useState();
 
-  const history = useHistory();
+    const history = useHistory();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     user,
@@ -66,7 +67,7 @@ const SideDrawer = () => {
 
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       };
@@ -77,20 +78,22 @@ const SideDrawer = () => {
         config
       );
 
+      console.log(data);
       // chats is an array, find is an function of array and it is checking each element and
       // if the current returned chat is already present in array, it will return true and don't push that chat into chats array.
+      
       if (!chats.find((c) => c._id === data._id)) {
         setChats([data, ...chats]);
       }
       
       setSelectedChat(data);
       setloadingChat(false);
-      // why this
       onClose();
+      window.location.reload();
     } catch (error) {
       toast({
-        title: "Error occured.",
-        description: "Failed to load the search results.",
+        title: "Error accessing the chat.",
+        description: error.message,
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -128,6 +131,8 @@ const SideDrawer = () => {
         config
       );
 
+      // console.log(data);
+      console.log("searched user " + JSON.stringify(data));
       setloading(false);
       setSearchResult(data);
     } catch (error) {
@@ -144,7 +149,6 @@ const SideDrawer = () => {
     }
   };
 
-  // console.log(user);
   return (
     <>
       {/* header box having search section, website name, and profile section */}
@@ -172,7 +176,7 @@ const SideDrawer = () => {
         </Text>
 
         <div>
-          <Menu>
+          {/* <Menu>
             <MenuButton p={1}>
               <NotificationBadge
                 count={notification.length}
@@ -206,7 +210,7 @@ const SideDrawer = () => {
                 </>
               )}
             </MenuList>
-          </Menu>
+          </Menu> */}
           {/* user profile */}
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -252,6 +256,7 @@ const SideDrawer = () => {
                 <UserListItem
                   key={user._id}
                   user={user}
+                  // access chat has all error.
                   handleFunction={() => accessChat(user._id)}
                 />
               ))

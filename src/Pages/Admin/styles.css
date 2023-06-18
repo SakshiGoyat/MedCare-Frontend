@@ -1,0 +1,13 @@
+.h1{
+    margin-top:8rem;
+    display: flex;
+    font-weight: 400;
+    justify-content: center;
+    align-items: center;
+}
+.footer {
+  position:absolute;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+}
